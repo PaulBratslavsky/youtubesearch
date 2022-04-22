@@ -1,7 +1,7 @@
 {
   "name": "youtube-search",
   "version": "0.0.0",
-  "description": "This is the description of the plugin.",
+  "description": "Easy way to get youtube video id and url.",
   "strapi": {
     "name": "youtube-search",
     "description": "Description of youtube-search plugin",

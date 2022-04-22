@@ -1,52 +1,15 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
 import { Box, Typography, Stack, Flex, Icon } from "@strapi/design-system";
 import ApiConfig from "./ApiConfig";
 import VideoSearch from "./VideoSearch";
-import axiosInstance from "../../utils/axiosInstance";
-
-function useConfigData() {
-  // const { initialData, isSingleType, slug } = useCMEditViewDataManager();
-
-  const [status, setStatus] = useState("loading");
-  const [apiKey, setApiKey] = useState(null);
-
-  const refetchAPIKey = async () => {
-    try {
-      const { data } = await axiosInstance.get(
-        `/content-manager/single-types/plugin::youtube-search.config`
-      );
-
-      setApiKey(data);
-      setStatus("success");
-    } catch (error) {
-      // TODO: revisit this to make more graceful
-      if (error.message === "failed with status code 404") {
-        setStatus("notfound");
-        setApiKey(null);
-      } else {
-        setStatus("error");
-        setApiKey(null);
-      }
-    }
-  };
-
-  useEffect(() => {
-    refetchAPIKey();
-  }, []);
-
-  return {
-    status,
-    apiKey,
-    refetchAPIKey,
-  };
-}
+import useConfigData from '../../hooks/useConfigData';
 
 export default function Videos() {
 
   const { status, apiKey, refetchAPIKey } = useConfigData();
 
   // TODO: handle status
-  
+
   return (
     <Box
       as="aside"
@@ -65,7 +28,7 @@ export default function Videos() {
         Video Search
       </Typography>
 
-      {apiKey ? <VideoSearch /> : <ApiConfig refetchAPIKey={refetchAPIKey} />}
+      {apiKey ? <VideoSearch apiKey={apiKey} /> : <ApiConfig refetchAPIKey={refetchAPIKey} />}
     </Box>
   );
 }
