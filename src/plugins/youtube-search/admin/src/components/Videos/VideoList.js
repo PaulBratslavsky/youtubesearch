@@ -6,6 +6,12 @@ const CardWrapper = styled(Card)`
   margin-bottom: 2rem;
 `;
 
+const ButtonWrapper = styled.div`
+  display: flex;
+  justify-content: space-between;
+  padding: 8px;
+`;
+
 const CardAssetImg = styled.img`
   margin: 0;
   padding: 0;
@@ -19,15 +25,12 @@ import {
   Card,
   CardHeader,
   CardBody,
-  CardCheckbox,
   CardAction,
-  CardAsset,
   CardTimer,
   CardContent,
-  CardBadge,
-  CardTitle,
-  CardSubtitle,
 } from "@strapi/design-system/Card";
+
+import { Button } from "@strapi/design-system/Button";
 
 import VideoView from "./VideoView";
 
@@ -60,17 +63,16 @@ function VideoCard({ video }) {
         {showVideo ? (
           <VideoView controls autoplay fullscreen videoId={video.id.videoId} />
         ) : (
-          <>
+          <React.Fragment>
             <CardAssetImg src={thumbnails.default.url} alt={title} />{" "}
             <CardTimer>{title}</CardTimer>
-          </>
+          </React.Fragment>
         )}
       </CardHeader>
-      <CardBody>
-        <CardContent>
-          <CardTitle>{title}</CardTitle>
-        </CardContent>
-      </CardBody>
+      <ButtonWrapper>
+        <Button>Get Details</Button>
+        <Button>Copy Link</Button>
+      </ButtonWrapper>
     </CardWrapper>
   );
 }
