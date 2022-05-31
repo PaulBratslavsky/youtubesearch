@@ -25,10 +25,6 @@
     "description": {
       "type": "text"
     },
-    "videoID": {
-      "type": "uid",
-      "required": true
-    },
     "videoURL": {
       "type": "string",
       "required": true,
