@@ -3,7 +3,7 @@ import axios from "axios";
 
 export default function useSearchVideos({ apiKey }) {
   const [videos, setVideos] = useState([]);
-  const [searchTerm, setSearchTerm] = useState("test");
+  const [searchTerm, setSearchTerm] = useState("");
   const [requestCount, setRequestCount] = useState(0);
   const [loading, setLoading] = useState(false);
 
@@ -41,6 +41,7 @@ export default function useSearchVideos({ apiKey }) {
   }, [searchTerm]);
 
   useEffect(() => {
+    if (searchTerm.length === 0) return null
     if (requestCount > 0) {
       const ourRequest = axios.CancelToken.source();
       getVideos(ourRequest);

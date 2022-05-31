@@ -29,7 +29,7 @@ export default function ApiConfig({ refetchAPIKey }) {
     <Stack padding={3} spacing={2}>
       <TextInput
         placeholder="Enter API key"
-        type="text"
+        type="password"
         label="API Key"
         name="apikey"
         onChange={(e) => setData(e.target.value)}
