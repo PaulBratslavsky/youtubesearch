@@ -7,7 +7,9 @@
     "description": "Description of youtube-search plugin",
     "kind": "plugin"
   },
-  "dependencies": {},
+  "dependencies": {
+    "use-copy": "^0.0.2"
+  },
   "author": {
     "name": "A Strapi developer"
   },

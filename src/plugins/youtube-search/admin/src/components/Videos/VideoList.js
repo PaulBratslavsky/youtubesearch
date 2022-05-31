@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import useCopy from "use-copy";
 import styled from "styled-components";
 
 const CardWrapper = styled(Card)`
@@ -47,8 +48,16 @@ function getYouTubeID(url) {
 function VideoCard({ video }) {
   console.log(video);
   const { thumbnails, title } = video.snippet;
-  console.log(thumbnails.default.url, title);
   const [showVideo, setShowVideo] = useState(false);
+  const [copied, copy, setCopied] = useCopy(`https://www.youtube.com/watch?v=${video.id.videoId}`);
+
+  const copyText = () => {
+    copy();
+ 
+    setTimeout(() => {
+      setCopied(false);
+    }, 3000);
+  };
   return (
     <CardWrapper id="first">
       <CardHeader>
@@ -71,7 +80,7 @@ function VideoCard({ video }) {
       </CardHeader>
       <ButtonWrapper>
         <Button>Get Details</Button>
-        <Button>Copy Link</Button>
+        <Button onClick={copyText}>{copied ? "Copied" : "Copy Link"}</Button>
       </ButtonWrapper>
     </CardWrapper>
   );
