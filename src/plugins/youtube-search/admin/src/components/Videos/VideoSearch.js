@@ -2,14 +2,16 @@ import React from "react";
 import { Stack } from "@strapi/design-system";
 import useSearchVideos from "../../hooks/useSearchVideos";
 import { Searchbar, SearchForm } from "@strapi/design-system/Searchbar";
+import { Box } from "@strapi/design-system/Box";
 import { Loader } from "@strapi/design-system/Loader";
-import VideoList from './VideoList';
+import VideoList from "./VideoList";
 
-export default function VideoSearch({ apiKey }) {
+export default function VideoSearch({ apiKey, showVideoDetail }) {
   const { loading, videos, searchTerm, setSearchTerm } =
     useSearchVideos(apiKey);
+
   return (
-    <>
+    <Box>
       <Stack padding={4} spacing={2}>
         <SearchForm
           style={{ border: "1px solid #dcdce4", borderRadius: "4px" }}
@@ -26,10 +28,14 @@ export default function VideoSearch({ apiKey }) {
           </Searchbar>
         </SearchForm>
       </Stack>
-      
+
       <Stack padding={4} spacing={2}>
-        {loading ? <Loader small>Loading content...</Loader> : <VideoList videos={videos} />}
+        {loading ? (
+          <Loader small>Loading content...</Loader>
+        ) : (
+          <VideoList videos={videos} showVideoDetail={showVideoDetail} />
+        )}
       </Stack>
-    </>
+    </Box>
   );
 }

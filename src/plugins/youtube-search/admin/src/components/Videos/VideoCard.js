@@ -15,6 +15,7 @@ const IframeContainer = styled.iframe`
 `;
 
 function VideoCard({ videoId, controls, autoplay }) {
+  console.log(videoId, "ASDASDFASDFASD");
   return (
     <div>
       <VideoContainerDiv>

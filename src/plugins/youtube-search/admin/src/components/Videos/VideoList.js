@@ -33,7 +33,7 @@ import {
 
 import { Button } from "@strapi/design-system/Button";
 
-import VideoView from "./VideoView";
+import VideoView from "./VideoCard";
 
 import { IconButton } from "@strapi/design-system/IconButton";
 import Eye from "@strapi/icons/Eye";
@@ -45,12 +45,10 @@ function getYouTubeID(url) {
   return match && match[2].length === 11 ? match[2] : null;
 }
 
-function VideoCard({ video }) {
-  console.log(video);
+function VideoCard({ video, showVideoDetail }) {
   const { thumbnails, title } = video.snippet;
   const [showVideo, setShowVideo] = useState(false);
   const [copied, copy, setCopied] = useCopy(`https://www.youtube.com/watch?v=${video.id.videoId}`);
-
   const copyText = () => {
     copy();
  
@@ -79,18 +77,18 @@ function VideoCard({ video }) {
         )}
       </CardHeader>
       <ButtonWrapper>
-        <Button>Get Details</Button>
+        <Button onClick={() => showVideoDetail(video)}>Get Details</Button>
         <Button onClick={copyText}>{copied ? "Copied" : "Copy Link"}</Button>
       </ButtonWrapper>
     </CardWrapper>
   );
 }
 
-export default function VideoList({ videos }) {
+export default function VideoList({ videos, showVideoDetail }) {
   return (
     <div style={{ maxHeight: "600px", overflowY: "scroll" }}>
       {videos.map((video) => (
-        <VideoCard key={video.id} video={video} />
+        <VideoCard key={video.id} video={video} showVideoDetail={showVideoDetail} />
       ))}
     </div>
   );
